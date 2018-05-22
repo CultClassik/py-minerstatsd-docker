@@ -1,4 +1,4 @@
-FROM: library/python:3.6.5
+FROM library/python:3.6.5
 
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
