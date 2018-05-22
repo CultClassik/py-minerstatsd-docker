@@ -10,7 +10,7 @@ services:
 script:
   - TAG="0.1"
   - CONT_NAME="minerstatsd"
-  - REPO=$DOCKER_USER
+  - DOCKER_REPO=$DOCKER_USER
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker build -t $REPO/$CONT_NAME:latest .
   - docker images
