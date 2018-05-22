@@ -1,4 +1,4 @@
-FROM: library/python:3.6.5-onbuild
+FROM: library/python:3.6.5
 
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
@@ -8,14 +8,9 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# map your own private ssh key here as readonly
-VOLUME /key.rsa
 
-EXPOSE 8000
-
-#CMD [ "pypy3", "/app/app.py" ]
-#CMD ["gunicorn", "app:api", "--name", "r10kdeploy", "--bind", "0.0.0.0:8000"]
-CMD [ 'app.py', '--interval', '20', '--url', 'http://localhost:3333' ]
+ENTRYPOINT ["/app/app.py"]
+CMD [ "--interval", "20", "--url", "http://localhost:3333" ]
 
 # run 1 of these containers per gpu
 # each minestatsd will export stats from ethminer/claymore via http api to the hosts' collectd daemon

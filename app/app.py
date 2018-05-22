@@ -6,11 +6,6 @@ import re
 import json
 import sys
 
-#cfg = {
-#    'interval': '20',
-#    'url': 'http://localhost:3333'
-#}
-
 def readconf(config):
     for node in config.children:
         for k in ['interval', 'url']:
@@ -18,9 +13,7 @@ def readconf(config):
                 cfg[k] = node.values[0]
                 collectd.info('{0} set to: {1}'.format(k, cfg[k]))
 
-
 def readvals(cons = False):
-
     if not cons:
         collectd.info('calling {0}'.format(cfg['url']))
 
@@ -69,9 +62,3 @@ if __name__ == '__main__':
 else:
     collectd.register_config(readconf)
     collectd.register_read(readvals, int(cfg['interval']))
-
-#collectd configuration goes like this:
-#    ModulePath "/home/imil/bin"
-#    Import "claymorestats"   
-#        interval "20"
-#        url "http://127.0.0.1:3333/"

@@ -1,0 +1,19 @@
+sudo: required
+
+language: bash
+
+dist: xenial
+
+services:
+  - docker
+
+script:
+  - TAG="0.1"
+  - CONT_NAME="minerstatsd"
+  - REPO=$DOCKER_USER
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker build -t $REPO/$CONT_NAME:latest .
+  - docker images
+  - docker tag $DOCKER_REPO/$CONT_NAME:latest $DOCKER_REPO/$CONT_NAME:$TAG
+  - docker push $REPO/$CONT_NAME:$TAG
+  - docker push $REPO/$CONT_NAME
